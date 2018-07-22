@@ -93,6 +93,13 @@ static function navbar()    {   ?>
     </nav>
         
     <?php }
+
+static function footer()    { ?>
+    </div>
+        </body>
+    </html>
+<?php }
+
 }
 
 
