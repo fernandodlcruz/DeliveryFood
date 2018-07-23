@@ -2,18 +2,24 @@
 
 class PageSetup {
 
-    public static $title = "Group Project";
+
+    public $title = "Group Project";
+
 
     static function header()    {?>
 
+
+            
    <!DOCTYPE html>
         <html>
             <head>
             <!--Import Google Icon Font-->
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
             <!--Import materialize.css-->
-            <link type="text/css" rel="stylesheet" href="style.css">
+            <link type="text/css" rel="stylesheet" href="style.css"/>
             
+            <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
             <!--Let browser know website is optimized for mobile-->
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             
@@ -26,52 +32,44 @@ class PageSetup {
             <script type="text/javascript" src="js/materialize.min.js"></script>
             <div class="container" id="Sign-Up">
             
-            <fieldset style="width:30%"><legend>Register for Customer</legend>
-            
-                <table border ="0">
-                
-                    <tr>
-                
-                    <form method="POST" action="connectivity-sign-up.php">
-                    
-                        <td>Name</td><td><input type="text" name="name"></td>
-                    
-                            </tr>
-                  
-                                <tr>
-                        
-                                    <td>Email</td><td> <input type="text" name="email"</td>
-                                
-                                        </tr>
-                                    
-                                            <tr>
-                                        
-                                                <td>Phone Number</td><td>   <input type="text" name="phone number"></td>
-                                            
-                                                    </tr>
-                                                
-                                                        <tr>
-                                                    
-                                                            <td>Password</td><td><input type="password" name="passw"></td>
-                                                        
-                                                                </tr>
-                                                            
-                                                                    <tr>
-                                                            
-                                                                        <td><input id="button" type="submit" name="submit" value="Sign-Up"></td>
-                                                                
-                                                                    </tr>
-                    </form>
-                
-                </table>
+            <fieldset style="width:30%"><legend>Register</legend>
+            <table border ="0">
+            <tr>
+            <form method="POST" action="connectivity-sign-up.php">
+            <td>Name</td><td><input type="text" name="name"></td>
+            </tr>
+            <tr>
+            <td>Email</td><td> <input type="text" name="email"</td>
+            </tr>
+            <tr>
+            <td>Phone Number</td><td>   <input type="text" name="phone number"></td>
+            </tr>
+            <tr>
+            <td>Password</td><td><input type="password" name="passw"></td>
+            </tr>
+            <tr>
+            <td>Confirm Password</td><td><input type="password" name="cpassw"></td>
+            </tr>
+            <tr>
+            <td><input id="button" type="submit" name="submit" value="Sign-Up"></td>
+            </tr>
+            </form>
+            </table>
             </fieldset>
-        </div>
-        </body>
-        </html>
+            </div>
+            </body>
+            </html>
     
         
     <?php }
 
+static function footer()    { ?>
+    </div>
+        </body>
+    </html>
+<?php }
+
+}
 static function navbar()    {   ?>
         
     <nav>
@@ -93,14 +91,6 @@ static function navbar()    {   ?>
     </nav>
         
     <?php }
-
-static function footer()    { ?>
-    </div>
-        </body>
-    </html>
-<?php }
-
-}
 
 
 
