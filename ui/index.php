@@ -1,11 +1,12 @@
 <?php
 
 
-require_once('inc/Page1.class.php');
+require_once('inc/Page.class.php');
 
-
+Page::$title = "Delivery Food Final Project";
 Page::header();
 Page::navbar();
+Page::showLogin();
 Page::footer();
 
 
