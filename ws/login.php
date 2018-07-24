@@ -47,4 +47,17 @@ var_dump($orderUser);
 echo "All orders from a business";
 var_dump($orderBusiness);
 
+
+$postdata = ['id' =>  0,
+        'name' => "test name",
+        'phone' => "977-554-3201",
+        'email' => "test@test.com",
+        'type' => "C",
+        'passw' => "testPassword",
+        'idCuisine' => null
+        ];
+$um->createUser($postdata);
+$users = $um->getAllUsers();
+var_dump($users);
+
 ?>
