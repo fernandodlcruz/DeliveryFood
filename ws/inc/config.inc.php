@@ -2,5 +2,5 @@
 define('DB_HOST','localhost');
 define('DB_USER','root');
 define('DB_PASS','');
-define('DB_NAME','deliveryproject');
+define('DB_NAME','deliveryfood');
 ?>
