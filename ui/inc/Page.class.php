@@ -123,7 +123,7 @@ class Page {
                         <div class="row" style="display: none;" id="selectCuisine">
                             <div class="input-field col s12">
                                 <select id="cuisine" name="cuisine">
-                                    <option value="" enabled selected>Choose your option</option>                                    
+                                    <option value="" disabled selected>Choose your option</option>                                    
                                 </select>
                                 <label>Type of Cuisine you attend</label>
                             </div>
@@ -179,7 +179,7 @@ class Page {
         <div class="row"  id="selectBusiness">
             <div class="input-field col s12">
                 <select id="business" name="business">
-                    <option value="" enabled selected>Choose your option</option>                                    
+                    <option value="" disabled selected>Choose your option</option>                                    
                 </select>
             <label>Type of Business</label>
             </div>
