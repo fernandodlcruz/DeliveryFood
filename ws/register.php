@@ -3,29 +3,26 @@ require_once('inc\config.inc.php');
 require_once('inc\DatabaseAgent.class.php');
 require_once('inc\UserMapper.class.php');
 
-//if(isset($_GET['callback']) && isset($_GET['email']) && isset($_GET['pwd'])) {
-if(isset($_GET['email']) && isset($_GET['pwd'])) {
+if(isset($_GET['callback']) && isset($_GET['email']) && isset($_GET['pwd']) && isset($_GET['userType'])) {
         $um = new UserMapper;
 
-        $postdata = ['name' => $_GET['name'],
-                'phone' => $_GET['phone'],
-                'email' => $_GET['email'],
-                'type' => $_GET['userType'],
-                'passw' => $_GET['pwd'],
+        $postdata = ['Name' => $_GET['name'],
+                'PhoneNumber' => $_GET['phone'],
+                'Email' => $_GET['email'],
+                'UserType' => $_GET['userType'],
+                'Pwd' => password_hash($_GET['pwd'], PASSWORD_DEFAULT),
                 'idCuisine' => $_GET['idCuisine']
                 ];
-        $um->createUser($postdata);
-
-        $postdata['id'] = $um->lastInsertId();
+        
+        $postdata['id'] = $um->createUser($postdata);
         $postdata['loggedIn'] = true;
-        $user['Pwd'] = "";
+        $postdata['Pwd'] = "";
 
         header('Content-type: application/json');
         header('Access-Control-Allow-Origin: *');
 
-        $jsonData = json_encode($user);
+        $jsonData = json_encode($postdata);
         
-        //echo $_GET['callback']."($jsonData)";
-        echo $jsonData;
+        echo $_GET['callback']."($jsonData)";
 }
 ?>

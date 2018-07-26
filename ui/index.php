@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 
 require_once('inc/Page.class.php');
 
@@ -8,6 +8,4 @@ Page::header();
 Page::navbar();
 Page::showLogin();
 Page::footer();
-
-
 ?>
