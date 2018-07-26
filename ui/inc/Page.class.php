@@ -39,6 +39,7 @@ class Page {
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
                 <script src="js/config.js"></script>
                 <script src="js/app.js"></script>
+                <script src="js/customer.js"></script>
             </body>
         </html>
     <?php }
@@ -122,7 +123,7 @@ class Page {
                         <div class="row" style="display: none;" id="selectCuisine">
                             <div class="input-field col s12">
                                 <select id="cuisine" name="cuisine">
-                                    <option value="" disabled selected>Choose your option</option>                                    
+                                    <option value="" enabled selected>Choose your option</option>                                    
                                 </select>
                                 <label>Type of Cuisine you attend</label>
                             </div>
@@ -170,7 +171,20 @@ class Page {
                     </form>
                 </div>
             </div>
+        </div>
+    <?php }
+
+    static function showBusiness(){?>
+
+        <div class="row"  id="selectBusiness">
+            <div class="input-field col s12">
+                <select id="business" name="business">
+                    <option value="" enabled selected>Choose your option</option>                                    
+                </select>
+            <label>Type of Business</label>
             </div>
+        </div>
+    
     <?php }
 }
 ?>

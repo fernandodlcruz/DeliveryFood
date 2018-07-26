@@ -7,7 +7,9 @@ Page::$title = "Delivery Food Final Project";
 Page::header();
 Page::navbar();
 
-var_dump($_SESSION['user']);
+//var_dump($_SESSION['user']);
+
+Page::showBusiness();
 
 Page::footer();
 ?>
