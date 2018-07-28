@@ -6,7 +6,7 @@ require_once('inc/CustomerPage.class.php');
 CustomerPage::$title = "Delivery Food Final Project";
 CustomerPage::header();
 CustomerPage::navbar();
-CustomerPage::showMenuSelection();
+CustomerPage::showConfirmation();
 CustomerPage::jsBundle();
 CustomerPage::footer();
 ?>

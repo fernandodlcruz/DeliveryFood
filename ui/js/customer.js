@@ -1,7 +1,13 @@
-$(document).ready(function(){
+$(document).ready(function() {
     loadBusiness();
     $('.fixed-action-btn').floatingActionButton({hoverEnabled: false});
     $('.tooltipped').tooltip();    
+
+    var path = window.location.pathname;
+    var page = path.split("/").pop();
+    if(page=="customerConfirm.php"){
+        loadSelectedItems();
+    }
 });
 
 function loadBusiness() {
@@ -26,6 +32,7 @@ function loadBusiness() {
 
 // Change the menu when user select different restaurant
 $('#business').change(function() {
+
     $.ajax({
         url: HOST_NAME + "menu.php",
         dataType: "jsonp",
@@ -36,9 +43,10 @@ $('#business').change(function() {
             $('#menuList').empty();
             $.each(data, function (index, obj) {
                 $('#menuList').append(createMenuItem(obj));
-            });
+            });            
             $('.collapsible').collapsible();
             $('#menuView').show();
+            $('.btn-floating').removeClass('disabled');
         },
         error: function (xhr, ajaxOptions, thrownError) {
             $('#menuView').hide();
@@ -55,8 +63,8 @@ function createMenuItem(data) {
             '    <div class="col s1">$' + data.Price + '</div>' +
             '    <div class="col s3">' +
             '    <div class="input-field col s6">' +
-            '        <input type="number" id="txtQty' + data.idMenu + '" min="0" max="10"  data-length="2">' +
-            '        <label for="qty">Qty to buy</label>' +
+            '        <input type="number" id="txtQty_' + data.idMenu + '" min="0" data-length="2">' +
+            '        <label for="txtQty_' + data.idMenu + '">Qty to buy</label>' +
             '    </div>' +
             '    </div>' +
             '</div>' +
@@ -66,5 +74,48 @@ function createMenuItem(data) {
 
 // Add to cart button
 $('.fixed-action-btn').click(function() {
-    alert('test');
+    var hasSelection = false;
+    var orderList = [];
+    var orderListQtys = [];
+
+    $('input[type=number]').each(function() {
+        if ($(this).val() != "" && $(this).val() != "0") {
+            hasSelection = true;
+            
+            orderList.push($(this).attr('id').split("_")[1]);
+            orderListQtys.push($(this).val());
+        }
+    });
+
+    if (!hasSelection) {
+        M.toast({html: 'Please, inform the quantity of the items you would like to order.'});
+    } else{
+        sessionStorage.setItem('orderList', orderList);
+        sessionStorage.setItem('orderListQtys', orderListQtys);
+        window.location.replace("customerConfirm.php");
+    }
 });
+
+function loadSelectedItems() {
+    var arrQtys = [sessionStorage.getItem('orderListQtys')];
+    $.ajax({
+        url: HOST_NAME + "menu.php",
+        dataType: "jsonp",
+        data: {
+            ids: sessionStorage.getItem('orderList')
+        },
+        success: function(data) {
+            $.each(data, function (index, obj) {
+                $('#menuItems').append('<tr>' +
+                                        '    <td>' + obj.Item + '</td>' +
+                                        '    <td>$' + obj.Price + '</td>' +
+                                        '    <td>' + arrQtys[index] + '</td>' +
+                                        '</tr>');
+            });            
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            console.log('status: ' + xhr.status);
+            console.log('error: ' + thrownError);
+        }
+    });
+}

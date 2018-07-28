@@ -28,6 +28,18 @@ class MenuMapper{
         return $menu;
      }
 
+     function getMenuByIds($arrIds) {
+        $menu = null;
+        $in  = str_repeat('?,', count($arrIds) - 1) . '?';
+
+        $pdoAgent = new DatabaseAgent;
+
+        $pdoAgent->query("SELECT * FROM menu WHERE idMenu IN (".$in.");");
+
+        $menu = $pdoAgent->resultset($arrIds);
+
+        return $menu;
+     }
 }
 
 ?>

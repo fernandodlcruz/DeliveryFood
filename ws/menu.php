@@ -13,5 +13,15 @@ if(isset($_GET['callback']) && isset($_GET['companyId'])) {
         header('Content-type: application/json');
         header('Access-Control-Allow-Origin: *');
         echo $_GET['callback']."($jsonData)";
+} else if(isset($_GET['callback']) && isset($_GET['ids'])) {
+        $mm = new MenuMapper;
+
+        $menu = $mm->getMenuByIds(array($_GET['ids']));
+
+        $jsonData = json_encode($menu);
+        
+        header('Content-type: application/json');
+        header('Access-Control-Allow-Origin: *');
+        echo $_GET['callback']."($jsonData)";
 }
 ?>

@@ -11,30 +11,52 @@ class CustomerPage extends Page {
         <script src="js/customer.js"></script>
     <?php }
 
-static function showMenuSelection() {?>
-    <div class="container">
-        <div class="row">
-            <div class="input-field col s12">
-                <select id="business" name="business">
-                    <option value="" disabled selected>Choose your option</option>                                    
-                </select>
-            <label>Select your restaurant</label>
+    static function showMenuSelection() {?>
+        <div class="container">
+            <div class="row">
+                <div class="input-field col s12">
+                    <select id="business" name="business">
+                        <option value="" disabled selected>Choose your option</option>                                    
+                    </select>
+                <label>Select your restaurant</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="fixed-action-btn">
+                    <a class="btn-floating btn-large red tooltipped disabled" data-position="top" data-tooltip="Add your items to the cart">
+                        <i class="large material-icons">shopping_cart</i>
+                    </a>
+                </div>
+                <div id="menuView" style="display: none">
+                    <h3 class="header">Choose from menu</h3>
+                    <ul class="collapsible popout" id="menuList">
+                    </ul>
+                </div>
             </div>
         </div>
+    <?php }
 
-        <div class="row">
-            <div class="fixed-action-btn">
-                <a class="btn-floating btn-large red tooltipped" data-position="top" data-tooltip="Add your items to the cart">
-                    <i class="large material-icons">shopping_cart</i>
-                </a>
+    static function showConfirmation() {?>
+        <div class="container">
+            <div class="row">
+                <h3 class="header">Confirm your order</h3>
             </div>
-            <div id="menuView" style="display: none">
-                <h3 class="header">Choose from menu</h3>
-                <ul class="collapsible popout" id="menuList">
-                </ul>
-            </div>
-        </div>
-    </div>        
 
-<?php }
+            <div class="row">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                    </tr>
+                    </thead>
+                    <tbody id="menuItems">
+                    </tbody>
+                </table>                    
+            </div>
+        </div>        
+
+    <?php }
 }

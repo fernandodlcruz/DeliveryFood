@@ -62,8 +62,12 @@ class DatabaseAgent {
 }
 
     //Execute all the things!
-    public function execute(){  
-        return $this->stmt->execute();
+    public function execute($params = null){  
+        if (is_null($params)) {
+            return $this->stmt->execute();
+        } else {
+            return $this->stmt->execute($params);
+        }
     }
 
     //Returns single rows
@@ -83,8 +87,8 @@ class DatabaseAgent {
     }  
 
     //resultset returns multiple records
-    public function resultset(){  
-        $this->execute();  
+    public function resultset($params = null){
+        $this->execute($params);
         return $this->stmt->fetchAll(PDO::FETCH_OBJ);  
     }  
 
