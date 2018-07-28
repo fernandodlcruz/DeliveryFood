@@ -20,7 +20,7 @@ class MenuMapper{
         //  $item['name'] (e.g. "Chorizo" )
         //  $item['description'] ("Chorizo is made from coarsely chopped pork and pork fat, seasoned with pimentón – a smoked paprika – and salt.")
         //  $item['unit'] ("200g")
-        //  $item['price'] ("10.50")
+        //  $item['price'] (10.50)
         //  $item['businessID']  ( Id from the business that is logged in)
 
         $pdoAgent = new DatabaseAgent;
@@ -40,6 +40,7 @@ class MenuMapper{
     }
     // End Create
 
+    // Start Read
     // $IDbusiness refers to `idUser` from `user`
     function getMenuByBusiness($IDbusiness){
         $menu = null;
@@ -67,6 +68,56 @@ class MenuMapper{
 
         return $menu;
      }
+
+     // End Read
+
+
+     // Start update
+
+     function updateItem($item){
+        // $item is an array
+        // $item should contain:
+        //  $item['idMenu'] (id of the item to be updated)
+        //  $item['businessID']  ( Id from the business that is logged in)
+        //  $item['name'] (e.g. "Chorizo" )
+        //  $item['description'] ("Chorizo is made from coarsely chopped pork and pork fat, seasoned with pimentón – a smoked paprika – and salt.")
+        //  $item['unit'] ("200g")
+        //  $item['price'] (10.50)
+        $pdoAgent = new DatabaseAgent;
+        //Name = :Name, Address = :Address, City = :City WHERE CustomerID = :Id;
+        $pdoAgent->query("UPDATE menu SET Item=:name, Description=:description, Unit=:unit,
+         Price=:price WHERE idMenu=:id AND idCompany=:businessID;");
+
+        $pdoAgent->bind('id',$item['id']);
+        $pdoAgent->bind('businessID',$item['businessID']);
+        $pdoAgent->bind('name',$item['name']);
+        $pdoAgent->bind('description',$item['description']);
+        $pdoAgent->bind('unit',$item['unit']);
+        $pdoAgent->bind('price',$item['price']);
+
+        $pdoAgent->execute();
+
+        return $pdoAgent->lastInsertId();
+
+     }
+
+     // End update
+
+
+     // Start delete
+     function deleteItem($idItem){
+        $pdoAgent = new DatabaseAgent;
+
+        $pdoAgent->query("DELETE FROM menu WHERE idMenu=:id;");
+
+        $pdoAgent->bind('id',$idItem);
+
+        $pdoAgent->execute();
+
+        return $idItem;
+     }
+
+     // End delete
 
 }
 

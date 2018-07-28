@@ -66,7 +66,16 @@ $item = ['name' => "Linguiça",
     'price' => 1.50,
     'businessID' => 4
 ];
-$mm->createItem($item);
+//$mm->createItem($item);
+//$mm->deleteItem(6);
+$update = ['id' => 7,
+    'name' => "Linguica",
+    'description' => "Most delicious sausage in the world.",
+    'unit' => "100g",
+    'price' => 1.50,
+    'businessID' => 4
+];
+//$mm->updateItem($update);
 
 
 
