@@ -7,11 +7,38 @@
 // | Item        | varchar(80)  | YES  |     | NULL    |                |
 // | Description | varchar(255) | YES  |     | NULL    |                |
 // | Unit        | varchar(45)  | YES  |     | NULL    |                |
-// | Price       | decimal(5,0) | YES  |     | NULL    |                |
+// | Price       | decimal(5,2) | YES  |     | NULL    |                |
 // | IdCompany   | int(11)      | YES  | MUL | NULL    |                |
 // +-------------+--------------+------+-----+---------+----------------+
 
 class MenuMapper{
+
+    // Start Create Menu Item
+    function createItem($item){
+        // $item is an array
+        // $item should contain:
+        //  $item['name'] (e.g. "Chorizo" )
+        //  $item['description'] ("Chorizo is made from coarsely chopped pork and pork fat, seasoned with pimentón – a smoked paprika – and salt.")
+        //  $item['unit'] ("200g")
+        //  $item['price'] ("10.50")
+        //  $item['businessID']  ( Id from the business that is logged in)
+
+        $pdoAgent = new DatabaseAgent;
+
+        $pdoAgent->query("INSERT INTO menu (Item, Description, Unit, Price, IdCompany) 
+        VALUES (:name, :description, :unit, :price, :businessID);");
+
+        $pdoAgent->bind('name',$item['name']);
+        $pdoAgent->bind('description',$item['description']);
+        $pdoAgent->bind('unit',$item['unit']);
+        $pdoAgent->bind('price',$item['price']);
+        $pdoAgent->bind('businessID',$item['businessID']);
+
+        $pdoAgent->execute();
+
+        return $pdoAgent->lastInsertId();
+    }
+    // End Create
 
     // $IDbusiness refers to `idUser` from `user`
     function getMenuByBusiness($IDbusiness){
@@ -40,6 +67,7 @@ class MenuMapper{
 
         return $menu;
      }
+
 }
 
 ?>

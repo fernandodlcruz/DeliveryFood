@@ -60,4 +60,14 @@ $um->createUser($postdata);
 $users = $um->getAllUsers();
 var_dump($users);
 
+$item = ['name' => "Linguiça",
+    'description' => "Most delicious sausage in the world.",
+    'unit' => "100g",
+    'price' => 1.50,
+    'businessID' => 4
+];
+$mm->createItem($item);
+
+
+
 ?>
