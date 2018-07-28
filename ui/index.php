@@ -7,5 +7,6 @@ Page::$title = "Delivery Food Final Project";
 Page::header();
 Page::navbar();
 Page::showLogin();
+Page::jsBundle();
 Page::footer();
 ?>

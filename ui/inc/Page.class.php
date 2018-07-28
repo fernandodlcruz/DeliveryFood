@@ -18,30 +18,24 @@ class Page {
                 <!--Let browser know website is optimized for mobile-->
                 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
                 
-                <title>Sign-up</title>
+                <title>Delivery Food</title>
             </head>
             <body id="body-color">
     <?php }
 
     static function footer() { ?>
-        </div>
-            <?php self::jsBundle(); ?>
             </body>
         </html>
     <?php }
 
     static function jsBundle() { ?>
-        </div>
-                <!--JavaScript at end of body for optimized loading-->
-                <!--script type="text/javascript" src="js/materialize.min.js"></script-->
-                <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-                <!-- Compiled and minified JavaScript -->
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
-                <script src="js/config.js"></script>
-                <script src="js/app.js"></script>
-                <script src="js/customer.js"></script>
-            </body>
-        </html>
+        <!--JavaScript at end of body for optimized loading-->
+        <!--script type="text/javascript" src="js/materialize.min.js"></script-->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+        <script src="js/config.js"></script>
+        <script src="js/app.js"></script>
     <?php }
 
     static function navbar() {?>
@@ -62,16 +56,17 @@ class Page {
                         echo '<li><a href="logout.php">Logout</a></li>';
                 } else {
                         //If they arent show a login button (link to the controller file)
-                        echo '<li><a href="Lab09FCr_63758.php">Login</a></li>';
+                        echo '<li><a href="index.php">Login</a></li>';
                 }
                 ?>
             </ul>
             </div>
         </nav>
+        <div class="row"></div>
+        <div class="row"></div>
     <?php }
 
     static function showLogin() { ?>
-        <div class="row"></div>
         <div class="container">
             <div class="row">
                 <div class="card-panel #fff9c4 yellow lighten-4" id="messages" style="display: none;"></div>
@@ -172,19 +167,6 @@ class Page {
                 </div>
             </div>
         </div>
-    <?php }
-
-    static function showBusiness(){?>
-
-        <div class="row"  id="selectBusiness">
-            <div class="input-field col s12">
-                <select id="business" name="business">
-                    <option value="" disabled selected>Choose your option</option>                                    
-                </select>
-            <label>Type of Business</label>
-            </div>
-        </div>
-    
     <?php }
 }
 ?>

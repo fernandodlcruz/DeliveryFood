@@ -2,14 +2,12 @@
 session_start();
 
 require_once('inc/Page.class.php');
+require_once('inc/CustomerPage.class.php');
 
-Page::$title = "Delivery Food Final Project";
-Page::header();
-Page::navbar();
-
-//var_dump($_SESSION['user']);
-
-Page::showBusiness();
-
-Page::footer();
+CustomerPage::$title = "Delivery Food Final Project";
+CustomerPage::header();
+CustomerPage::navbar();
+CustomerPage::showMenuSelection();
+CustomerPage::jsBundle();
+CustomerPage::footer();
 ?>

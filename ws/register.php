@@ -6,13 +6,22 @@ require_once('inc\UserMapper.class.php');
 if(isset($_GET['callback']) && isset($_GET['email']) && isset($_GET['pwd']) && isset($_GET['userType'])) {
         $um = new UserMapper;
 
-        $postdata = ['Name' => $_GET['name'],
-                'PhoneNumber' => $_GET['phone'],
-                'Email' => $_GET['email'],
-                'UserType' => $_GET['userType'],
-                'Pwd' => password_hash($_GET['pwd'], PASSWORD_DEFAULT),
-                'idCuisine' => $_GET['idCuisine']
+        if (isset($_GET['idCuisine']) && !empty($_GET['idCuisine'])) {
+                $postdata = ['Name' => $_GET['name'],
+                        'PhoneNumber' => $_GET['phone'],
+                        'Email' => $_GET['email'],
+                        'UserType' => $_GET['userType'],
+                        'Pwd' => password_hash($_GET['pwd'], PASSWORD_DEFAULT),
+                        'idCuisine' => $_GET['idCuisine']
                 ];
+        } else {
+                $postdata = ['Name' => $_GET['name'],
+                        'PhoneNumber' => $_GET['phone'],
+                        'Email' => $_GET['email'],
+                        'UserType' => $_GET['userType'],
+                        'Pwd' => password_hash($_GET['pwd'], PASSWORD_DEFAULT)
+                ];
+        }
         
         $postdata['id'] = $um->createUser($postdata);
         $postdata['loggedIn'] = true;

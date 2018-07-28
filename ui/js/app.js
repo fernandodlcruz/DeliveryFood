@@ -7,6 +7,7 @@ $(document).ready(function(){
 // Signup button function
 $("#btnSignup").click(function() {
     var usrType = ($("#chkCustomer").is(":checked")) ? "B" : "C";
+    var idCuisine = (!$("#cuisine").val()) ? "": $("#cuisine").val();
 
     $.ajax({
         url: HOST_NAME + "register.php",
@@ -17,7 +18,7 @@ $("#btnSignup").click(function() {
             email: $("#email").val(),
             userType: usrType,
             pwd: $("#pwd").val(),
-            idCuisine: $("#cuisine").val()
+            idCuisine: idCuisine
         },
         success: function(data) {
             loadUser(data);

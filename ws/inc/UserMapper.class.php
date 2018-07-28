@@ -21,8 +21,13 @@ class UserMapper    {
 
         $pdoAgent = new DatabaseAgent;
 
-        $pdoAgent->query("INSERT INTO user (Name, PhoneNumber, Email, Usertype, Pwd, IdCuisine) 
-        VALUES (:name, :phone, :email, :type, :passw, :idCuisine);");
+        if (isset($postdata['idCuisine'])) {
+            $pdoAgent->query("INSERT INTO user (Name, PhoneNumber, Email, Usertype, Pwd, IdCuisine) 
+            VALUES (:name, :phone, :email, :type, :passw, :idCuisine);");
+        } else {
+            $pdoAgent->query("INSERT INTO user (Name, PhoneNumber, Email, Usertype, Pwd) 
+            VALUES (:name, :phone, :email, :type, :passw);");
+        }
 
         // postdata is declared in the login file for testing
         $pdoAgent->bind('name',$postdata['Name']);
@@ -30,7 +35,10 @@ class UserMapper    {
         $pdoAgent->bind('email',$postdata['Email']);
         $pdoAgent->bind('type',$postdata['UserType']);
         $pdoAgent->bind('passw',$postdata['Pwd']);
-        $pdoAgent->bind('idCuisine',$postdata['idCuisine']);
+        
+        if (isset($postdata['idCuisine'])) {
+            $pdoAgent->bind('idCuisine',$postdata['idCuisine']);
+        }
 
         $pdoAgent->execute();
 
