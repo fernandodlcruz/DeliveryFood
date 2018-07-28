@@ -1,1 +1,0 @@
-var HOST_NAME = "http://localhost/deliveryfood/ws/";
