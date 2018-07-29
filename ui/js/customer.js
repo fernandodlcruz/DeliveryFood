@@ -1,12 +1,15 @@
 $(document).ready(function() {
-    loadBusiness();
-    $('.fixed-action-btn').floatingActionButton({hoverEnabled: false});
-    $('.tooltipped').tooltip();    
-
     var path = window.location.pathname;
     var page = path.split("/").pop();
-    if(page=="customerConfirm.php"){
+
+    if(page=="customer.php") {
+        loadBusiness();
+        $('.fixed-action-btn').floatingActionButton({hoverEnabled: false});
+        $('.tooltipped').tooltip();    
+    } else if(page=="customerConfirm.php") {
         loadSelectedItems();
+        loadAddresses();
+        $('.modal').modal();
     }
 });
 
@@ -92,26 +95,32 @@ $('.fixed-action-btn').click(function() {
     } else{
         sessionStorage.setItem('orderList', orderList);
         sessionStorage.setItem('orderListQtys', orderListQtys);
+        sessionStorage.setItem('companyId', $('#business').val());
         window.location.replace("customerConfirm.php");
     }
 });
 
 function loadSelectedItems() {
-    var arrQtys = [sessionStorage.getItem('orderListQtys')];
+    var arrQtys = sessionStorage.getItem('orderListQtys').split(',');
+    var total = 0.0;
+
     $.ajax({
         url: HOST_NAME + "menu.php",
         dataType: "jsonp",
         data: {
-            ids: sessionStorage.getItem('orderList')
+            ids: sessionStorage.getItem('orderList').split(',')
         },
         success: function(data) {
             $.each(data, function (index, obj) {
+                total += parseFloat(obj.Price) * parseInt(arrQtys[index]);
                 $('#menuItems').append('<tr>' +
                                         '    <td>' + obj.Item + '</td>' +
                                         '    <td>$' + obj.Price + '</td>' +
                                         '    <td>' + arrQtys[index] + '</td>' +
-                                        '</tr>');
-            });            
+                                        '</tr>' +
+                                        '<input type="hidden" id="hdn_' + obj.idMenu + '" value="' + obj.Price + '">');
+            });
+            $('#totalOrder').text(total.toFixed(2));
         },
         error: function (xhr, ajaxOptions, thrownError) {
             console.log('status: ' + xhr.status);
@@ -119,3 +128,95 @@ function loadSelectedItems() {
         }
     });
 }
+
+function loadAddresses() {
+    var address;
+
+    $.ajax({
+        url: HOST_NAME + "address.php",
+        dataType: "jsonp",
+        data: {
+            idUser: $('#hdnUid').val()
+        },
+        success: function(data) {
+            $.each(data, function (index, obj) {
+                address = obj.Line1 + obj.Line2 + ', ' + obj.City + ', ' + obj.StateProvince + ', ' + obj.PostalCode;
+                $('#addressList').append('<p><label>' + 
+                                            '<input name="optAddress" type="radio" id="optionId' + obj.idAddress + '" class="with-gap qOptionClass" value="' + obj.idAddress + '" />' + 
+                                            '<span>' + address + '</span>' + 
+                                        '</label></p>');
+            });
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            console.log('status: ' + xhr.status);
+            console.log('error: ' + thrownError);
+        }
+    });
+}
+
+$('#btnPlaceOrder').click(function() {
+    if ($('#addressLine1').val() != '' && $('#city').val() != '' && $('#stateProv').val() != '' && $('#postalCode').val() != '') {
+        insertAddress();
+        placeOrder();
+    } else if ($('input[name=optAddress]:checked').val()) {
+        placeOrder();
+    } else {
+        M.toast({'html': 'Please, Select an address from the list, or insert a new one.'});
+    }
+});
+
+function insertAddress() {
+    $.ajax({
+        url: HOST_NAME + "address.php",
+        dataType: "jsonp",
+        data: {
+            line1: $("#addressLine1").val(),
+            line2: $("#addressLine2").val(),
+            city: $("#city").val(),
+            stateProv: $("#stateProv").val(),
+            postalCode: $("#postalCode").val(),
+            idUser: $('#hdnUid').val()
+        },
+        success: function(data) {
+            console.log('ok');
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            console.log('status: ' + xhr.status);
+            console.log('error: ' + thrownError);
+        }
+    });
+}
+
+function placeOrder() {
+    var companyId = sessionStorage.getItem('companyId');
+    var menuList = sessionStorage.getItem('orderList').split(',');
+    var arrQtys = sessionStorage.getItem('orderListQtys').split(',');
+    var isPlaced = true;
+    
+    $.each(menuList, function(index, value) {
+        $.ajax({
+            url: HOST_NAME + "placeOrder.php",
+            dataType: "jsonp",
+            data: {
+                companyId: companyId,
+                userId: $('#hdnUid').val(),
+                menuId: value,
+                quantity: arrQtys[index],
+                totalPrice: parseFloat($("#hdn_" + value).val()) * parseInt(arrQtys[index])
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                isPlaced = false;
+                console.log('status: ' + xhr.status);
+                console.log('error: ' + thrownError);
+            }
+        });
+    });
+
+    if (isPlaced) {
+        $('.modal').modal('open');
+    }
+}
+
+$('.modal-close').click(function() {
+    window.location.replace("customer.php");
+});

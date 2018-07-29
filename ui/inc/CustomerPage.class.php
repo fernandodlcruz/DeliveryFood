@@ -54,9 +54,76 @@ class CustomerPage extends Page {
                     </thead>
                     <tbody id="menuItems">
                     </tbody>
-                </table>                    
+                </table>
+                <p class="right-align"><b>Total of your order: $<span id="totalOrder"></span></b></p>
             </div>
-        </div>        
+        </div>
+    <?php }
 
+    static function showAddressForm() {?>
+        <div class="container">
+            <div class="row">
+                <h4 class="header">Inform your address</h4>
+            </div>
+
+            <div class="row">
+                <div class="col s6">
+                    <h5 class="header">Select from the list or</h5>
+                    <span id="addressList"></span>
+                </div>
+                <div class="col s6">
+                    <h5 class="header">Inform a new address</h5>
+                    <form class="col s12" method="POST" action="">
+                        <input id="hdnUid" name="hdnUid" type="hidden" value="<?php echo $_SESSION['user']['idUser']; ?>">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="addressLine1" name="addressLine1" type="text" class="validate">
+                                <label for="addressLine1">Address Line 1</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="addressLine2" name="addressLine2" type="text" class="validate">
+                                <label for="addressLine2">Address Line 2</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s4">
+                                <input id="city" name="city" type="text" class="validate">
+                                <label for="city">City</label>
+                            </div>
+                            <div class="input-field col s4">
+                                <input id="stateProv" name="stateProv" type="text" class="validate">
+                                <label for="stateProv">State/Province</label>
+                            </div>
+                            <div class="input-field col s4">
+                                <input id="postalCode" name="postalCode" type="text" class="validate">
+                                <label for="postalCode">Postal Code</label>
+                            </div>
+                        </div>                        
+                    </form>
+                </div>
+            </div>
+            <div class="row center">
+                <div class="input-field col s12">
+                <button class="btn waves-effect waves-light" type="button" name="btnPlaceOrder" id="btnPlaceOrder">Place Order
+                    <i class="material-icons right">send</i>
+                </button>
+                </div>
+            </div>
+        </div>
+    <?php }
+
+    static function createModal() {?>
+        <div id="modalFinish" class="modal">
+            <div class="modal-content">
+                <h4>All Done!</h4>
+                <i class="large material-icons">check_circle_outline</i>
+                <p>You´ve completed your order! Now just wait until your food has been delivered!</p>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Ok</a>
+            </div>
+        </div>
     <?php }
 }

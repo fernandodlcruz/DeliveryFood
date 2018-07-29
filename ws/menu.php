@@ -16,7 +16,7 @@ if(isset($_GET['callback']) && isset($_GET['companyId'])) {
 } else if(isset($_GET['callback']) && isset($_GET['ids'])) {
         $mm = new MenuMapper;
 
-        $menu = $mm->getMenuByIds(array($_GET['ids']));
+        $menu = $mm->getMenuByIds($_GET['ids']);
 
         $jsonData = json_encode($menu);
         
