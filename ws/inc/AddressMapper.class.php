@@ -15,7 +15,7 @@
 
 class AddressMapper{
 
-    function getAddress($id){
+    function getAddressByUserId($id) {
         $address = null;
 
         $pdoAgent = new DatabaseAgent;
@@ -24,11 +24,31 @@ class AddressMapper{
 
         $pdoAgent->bind(':id',$id);
 
-        $address = $pdoAgent->single();
+        $address = $pdoAgent->resultset();
 
         return $address;
     }
 
+    // Create
+    function createAddress($postdata) {
+
+        $pdoAgent = new DatabaseAgent;
+
+        $pdoAgent->query("INSERT INTO address (Line1, Line2, City, StateProvince, PostalCode, IdUser) 
+        VALUES (:line1, :line2, :city, :stateProv, :postal, :idUser);");
+
+        // postdata is declared in the login file for testing
+        $pdoAgent->bind('line1',$postdata['Line1']);
+        $pdoAgent->bind('line2',$postdata['Line2']);
+        $pdoAgent->bind('city',$postdata['City']);
+        $pdoAgent->bind('stateProv',$postdata['StateProvince']);
+        $pdoAgent->bind('postal',$postdata['PostalCode']);
+        $pdoAgent->bind('idUser',$postdata['idUser']);
+        
+        $pdoAgent->execute();
+
+        return $pdoAgent->lastInsertId();
+    }
 }
 
 ?>

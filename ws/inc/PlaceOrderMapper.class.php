@@ -55,6 +55,26 @@ class PlaceOrderMapper{
 
         return $order;
     }
+
+    // Create
+    function createOrder($postdata) {
+
+        $pdoAgent = new DatabaseAgent;
+
+        $pdoAgent->query("INSERT INTO PlaceOrder (IdCompanyOrder, IdUserOrder, IdMenuOrder, Quantity, TotalPrice) 
+        VALUES (:companyId, :userId, :menuId, :quantity, :totalPrice);");
+
+        // postdata is declared in the login file for testing
+        $pdoAgent->bind('companyId',$postdata['companyId']);
+        $pdoAgent->bind('userId',$postdata['userId']);
+        $pdoAgent->bind('menuId',$postdata['menuId']);
+        $pdoAgent->bind('quantity',$postdata['quantity']);
+        $pdoAgent->bind('totalPrice',$postdata['totalPrice']);
+        
+        $pdoAgent->execute();
+
+        return $pdoAgent->lastInsertId();
+    }
 }
 
 ?>

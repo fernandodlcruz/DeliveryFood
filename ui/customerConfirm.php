@@ -7,6 +7,8 @@ CustomerPage::$title = "Delivery Food Final Project";
 CustomerPage::header();
 CustomerPage::navbar();
 CustomerPage::showConfirmation();
+CustomerPage::showAddressForm();
+CustomerPage::createModal();
 CustomerPage::jsBundle();
 CustomerPage::footer();
 ?>
