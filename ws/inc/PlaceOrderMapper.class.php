@@ -13,6 +13,41 @@
 
 class PlaceOrderMapper{
 
+    // Start create order
+
+    function createOrder($order){
+        // $order needs the following data:
+        //  $order['companyID'], $order['userID'], $order['menuID']
+        //  $order['qty'], $order['totalPrice'].
+
+        $pdoAgent = new DatabaseAgent;
+
+        $pdoAgent->query("INSERT INTO placeorder (idOrder,IdCompanyOrder, IdUserOrder, IdMenuOrder,
+        Quantity, TotalPrice) 
+        VALUES (:orderID, :companyId, :userId, :menuId, :qty, :totalprice);");
+
+        // If the
+        if(isset($order['orderID'])){
+            $orderID = $order['orderID'];
+        }
+        else{
+            $orderID = $this->getLastID();
+        }
+
+        $pdoAgent->bind(':orderID', $orderID);
+        $pdoAgent->bind(':companyId',$order['companyID']);
+        $pdoAgent->bind(':userId',$order['userID']);
+        $pdoAgent->bind(':menuId',$order['menuID']);
+        $pdoAgent->bind(':qty',$order['qty']);
+        $pdoAgent->bind(':totalprice',$order['totalPrice']);
+
+        $pdoAgent->execute();
+
+        return $pdoAgent->lastInsertId();
+    }
+
+    // End create order
+
     // This function returns the a full order
     function getOrderByID($orderID){
         $order = null;
@@ -54,6 +89,14 @@ class PlaceOrderMapper{
         $order = $pdoAgent->resultset();
 
         return $order;
+    }
+
+    function getLastID(){
+        $id = null;
+        $pdoAgent = new DatabaseAgent;
+        $pdoAgent->query("SELECT MAX(idOrder) FROM placeorder;");
+        $id = $pdoAgent->single();
+        return $id['MAX(idOrder)']+1;
     }
 }
 
