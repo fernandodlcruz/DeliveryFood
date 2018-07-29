@@ -26,19 +26,19 @@ class PlaceOrderMapper{
         Quantity, TotalPrice) 
         VALUES (:orderID, :companyId, :userId, :menuId, :qty, :totalprice);");
 
-        // If the
-        if(isset($order['orderID'])){
-            $orderID = $order['orderID'];
-        }
-        else{
-            $orderID = $this->getLastID();
-        }
+        $orderID = 1;
+        // if(isset($order['orderID'])){
+        //     $orderID = $order['orderID'];
+        // }
+        // else{
+        //     $orderID = $this->getLastID();
+        // }
 
         $pdoAgent->bind(':orderID', $orderID);
-        $pdoAgent->bind(':companyId',$order['companyID']);
-        $pdoAgent->bind(':userId',$order['userID']);
-        $pdoAgent->bind(':menuId',$order['menuID']);
-        $pdoAgent->bind(':qty',$order['qty']);
+        $pdoAgent->bind(':companyId',$order['companyId']);
+        $pdoAgent->bind(':userId',$order['userId']);
+        $pdoAgent->bind(':menuId',$order['menuId']);
+        $pdoAgent->bind(':qty',$order['quantity']);
         $pdoAgent->bind(':totalprice',$order['totalPrice']);
 
         $pdoAgent->execute();
@@ -92,31 +92,12 @@ class PlaceOrderMapper{
     }
 
     function getLastID(){
-        $id = null;
+        $id = 0;
         $pdoAgent = new DatabaseAgent;
         $pdoAgent->query("SELECT MAX(idOrder) FROM placeorder;");
         $id = $pdoAgent->single();
         return $id['MAX(idOrder)']+1;
     }
-    // // Create
-    // function createOrder($postdata) {
-
-    //     $pdoAgent = new DatabaseAgent;
-
-    //     $pdoAgent->query("INSERT INTO PlaceOrder (IdCompanyOrder, IdUserOrder, IdMenuOrder, Quantity, TotalPrice) 
-    //     VALUES (:companyId, :userId, :menuId, :quantity, :totalPrice);");
-
-    //     // postdata is declared in the login file for testing
-    //     $pdoAgent->bind('companyId',$postdata['companyId']);
-    //     $pdoAgent->bind('userId',$postdata['userId']);
-    //     $pdoAgent->bind('menuId',$postdata['menuId']);
-    //     $pdoAgent->bind('quantity',$postdata['quantity']);
-    //     $pdoAgent->bind('totalPrice',$postdata['totalPrice']);
-        
-    //     $pdoAgent->execute();
-
-    //     return $pdoAgent->lastInsertId();
-    // }
 }
 
 ?>

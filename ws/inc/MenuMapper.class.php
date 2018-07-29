@@ -84,7 +84,7 @@ class MenuMapper{
         //  $item['unit'] ("200g")
         //  $item['price'] (10.50)
         $pdoAgent = new DatabaseAgent;
-        //Name = :Name, Address = :Address, City = :City WHERE CustomerID = :Id;
+
         $pdoAgent->query("UPDATE menu SET Item=:name, Description=:description, Unit=:unit,
          Price=:price WHERE idMenu=:id AND idCompany=:businessID;");
 
