@@ -156,10 +156,9 @@ function loadAddresses() {
 
 $('#btnPlaceOrder').click(function() {
     if ($('#addressLine1').val() != '' && $('#city').val() != '' && $('#stateProv').val() != '' && $('#postalCode').val() != '') {
-        insertAddress();
-        placeOrder();
+        placeOrder(insertAddress());
     } else if ($('input[name=optAddress]:checked').val()) {
-        placeOrder();
+        placeOrder($('input[name=optAddress]:checked').val());
     } else {
         M.toast({'html': 'Please, Select an address from the list, or insert a new one.'});
     }
@@ -178,7 +177,7 @@ function insertAddress() {
             idUser: $('#hdnUid').val()
         },
         success: function(data) {
-            console.log('ok');
+            return data.id;
         },
         error: function (xhr, ajaxOptions, thrownError) {
             console.log('status: ' + xhr.status);
@@ -187,7 +186,7 @@ function insertAddress() {
     });
 }
 
-function placeOrder() {
+function placeOrder(address) {
     var companyId = sessionStorage.getItem('companyId');
     var menuList = sessionStorage.getItem('orderList').split(',');
     var arrQtys = sessionStorage.getItem('orderListQtys').split(',');
@@ -201,6 +200,7 @@ function placeOrder() {
                 companyId: companyId,
                 userId: $('#hdnUid').val(),
                 menuId: value,
+                addressId: address,
                 quantity: arrQtys[index],
                 totalPrice: parseFloat($("#hdn_" + value).val()) * parseInt(arrQtys[index])
             },

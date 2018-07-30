@@ -57,17 +57,27 @@ $("#btnLogin").click(function() {
 
 //Load user
 function loadUser(data) {
-    if (data.loggedIn) {
-        request = new XMLHttpRequest();
-        request.open("POST", "inc/LoadSession.inc.php", true);
-        request.setRequestHeader("Content-type", "application/json");
-        request.send(JSON.stringify(data));
+    var page = '';
 
-        if (data.UserType == 'B') {
-            window.location.replace("business.php");
-        } else {
-            window.location.replace("customer.php");
-        }
+    if (data.loggedIn) {
+        $.ajax({
+            type: 'POST',
+            url: "inc/LoadSession.inc.php",
+            data: JSON.stringify(data),
+            success: function(data) {
+                if (data.UserType == 'B') {
+                    page = "business.php";
+                } else {
+                    page = "customer.php";
+                }
+                setTimeout(window.location.replace(page), 2000);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert('Something went wrong trying logging you in');
+                console.log('status: ' + xhr.status);
+                console.log('error: ' + thrownError);
+            }
+        });        
     } else {
         $('#messages').html('E-mail/password invalid. Please, try again');
         $('#messages').show();

@@ -8,6 +8,7 @@ require_once('inc\AddressMapper.class.php');
 require_once('inc\MenuMapper.class.php');
 require_once('inc\PlaceOrderMapper.class.php');
 
+echo password_hash('pass', PASSWORD_DEFAULT);
 
 $um = new UserMapper;
 //$um->getAllUsers();

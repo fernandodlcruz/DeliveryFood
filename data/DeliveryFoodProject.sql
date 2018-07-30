@@ -97,6 +97,8 @@ CREATE TABLE IF NOT EXISTS `PlaceOrder` (
   `IdCompanyOrder` INT NULL,
   `IdUserOrder` INT NULL,
   `IdMenuOrder` INT NOT NULL,
+  `idAddressOrder` INT NULL,
+  `OrderDate` DATETIME NULL,
   `Quantity` INT NULL,
   `TotalPrice` DECIMAL(5,2) NULL,
   PRIMARY KEY (`idOrder`,`IdMenuOrder`),
@@ -117,6 +119,11 @@ CREATE TABLE IF NOT EXISTS `PlaceOrder` (
   CONSTRAINT `IdMenuOrder`
     FOREIGN KEY (`IdMenuOrder`)
     REFERENCES `Menu` (`idMenu`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `idAddressOrder`
+    FOREIGN KEY (`idAddressOrder`)
+    REFERENCES `Address` (`idAddress`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
