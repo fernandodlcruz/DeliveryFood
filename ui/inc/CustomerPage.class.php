@@ -79,8 +79,7 @@ class CustomerPage extends Page {
                 </div>
                 <div class="col s6">
                     <h5 class="header">Inform a new address</h5>
-                    <form class="col s12" method="POST" action="">
-                        <input id="hdnUid" name="hdnUid" type="hidden" value="<?php echo $_SESSION['user']['idUser']; ?>">
+                    <form class="col s12" method="POST" action="">                        
                         <div class="row">
                             <div class="input-field col s12">
                                 <input id="addressLine1" name="addressLine1" type="text" class="validate">

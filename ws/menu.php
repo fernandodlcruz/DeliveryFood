@@ -23,5 +23,16 @@ if(isset($_GET['callback']) && isset($_GET['companyId'])) {
         header('Content-type: application/json');
         header('Access-Control-Allow-Origin: *');
         echo $_GET['callback']."($jsonData)";
+} else if(isset($_GET['callback']) && isset($_GET['deleteId'])) {
+        $mm = new MenuMapper;
+
+        $menu = $mm->deleteItem($_GET['deleteId']);
+        $menu = ['deletedId' => $menu];
+
+        $jsonData = json_encode($menu);
+        
+        header('Content-type: application/json');
+        header('Access-Control-Allow-Origin: *');
+        echo $_GET['callback']."($jsonData)";
 }
 ?>

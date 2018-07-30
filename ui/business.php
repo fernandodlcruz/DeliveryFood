@@ -1,12 +1,16 @@
 <?php
 require_once('inc/config.inc.php');
 require_once('inc/Page.class.php');
+require_once('inc/BusinessPage.class.php');
 
-Page::$title = "Delivery Food Final Project";
-Page::header();
-Page::navbar();
 
-var_dump($_SESSION['user']);
+BusinessPage::$title = "Delivery Food Final Project";
+BusinessPage::header();
+BusinessPage::navbar();
 
-Page::footer();
+BusinessPage::showAllOrders();
+BusinessPage::showMenu();
+BusinessPage::jsBundle();
+
+BusinessPage::footer();
 ?>

@@ -44,6 +44,7 @@ class Page {
             <?php
             if (isset($_SESSION['user']) && $_SESSION['user']['loggedIn']) {
                 echo '<a href="#" class="brand-logo">&emsp;'.self::$title.' - '.$_SESSION['user']['Name'].'</a>';
+                echo '<input id="hdnUid" name="hdnUid" type="hidden" value="'.$_SESSION['user']['idUser'].'">';
             } else {
                 echo '<a href="#" class="brand-logo">&emsp;'.self::$title.'</a>';
             }
@@ -59,7 +60,7 @@ class Page {
                         echo '<li><a href="index.php">Login</a></li>';
                 }
                 ?>
-            </ul>
+            </ul>            
             </div>
         </nav>
         <div class="row"></div>

@@ -64,12 +64,13 @@ function loadUser(data) {
             type: 'POST',
             url: "inc/LoadSession.inc.php",
             data: JSON.stringify(data),
-            success: function(data) {
+            success: function() {
+                console.log(data.UserType);
                 if (data.UserType == 'B') {
                     page = "business.php";
                 } else {
                     page = "customer.php";
-                }
+                }                
                 setTimeout(window.location.replace(page), 2000);
             },
             error: function (xhr, ajaxOptions, thrownError) {

@@ -47,9 +47,17 @@ class PlaceOrderMapper{
 
         $pdoAgent = new DatabaseAgent;
 
-        $pdoAgent->query("SELECT * FROM placeorder WHERE IdCompanyOrder = :id;");
+        // $pdoAgent->query("SELECT idOrder, Item, Description, OrderDate, Quantity, TotalPrice  
+        // FROM placeorder, menu
+        // WHERE IdMenuOrder = idMenu AND IdCompanyOrder=:id;");
+        $pdoAgent->query("SELECT C.Name, C.PhoneNumber, C.Email, PO.idOrder, PO.OrderDate, PO.Quantity, PO.TotalPrice, M.Item, A.Line1, A.Line2, A.City, A.StateProvince, A.PostalCode
+                            FROM PlaceOrder PO
+                            INNER JOIN User C ON C.idUser = PO.IdUserOrder
+                            INNER JOIN Menu M ON M.idMenu = PO.IdMenuOrder
+                            INNER JOIN Address A ON A.idAddress = PO.IdAddressOrder
+                            WHERE IdCompanyOrder = :id;");
 
-        $pdoAgent->bind(':id',$id);
+        $pdoAgent->bind('id',$id);
 
         $order = $pdoAgent->resultset();
 
