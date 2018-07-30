@@ -7,37 +7,19 @@ The two new technologies that we implemented in our term project were Ajax, JSON
 (Web Service goes here)
 
 
-Technology X- Ajax
-Technology X- The ability to send and retrieve data in the background without interfering with the display of the present page. It does not have to refresh the page to show the data and therefore not only makes the webpage faster, but also does not interfere with the users UI on the existing page.
-Technology X- app.js
-	            Business.js
-	            Customer.js
+Technology X- Ajax. The ability to send and retrieve data in the background without interfering with the display of the present page. It does not have to refresh the page to show the data and therefore not only makes the webpage faster, but also does not interfere with the users UI on the existing page. It is found in the following files: app.js, business.js,  customer.js.
+	           
 URL X- https://www.w3schools.com/xml/ajax_intro.asp
 	https://www.tutorialspoint.com/ajax/what_is_ajax.htm
 	
-Technology Y-JSON
-Technology Y:JSON is a way to store information that is easily accessible by the user. This is an easy way to gather information in an organized manner and allows the user to access data with ease. JSON stands for JavaScript Object Notation.
-Technology Y: address.php
-             Companies.php
-	Cuisine.php
-	Login.php
-	Menu.php
-	placeOrder.php
-	Register.php
+Technology Y-JSON. JSON is a way to store information that is easily accessible by the user. This is an easy way to gather information in an organized manner and allows the user to access data with ease. JSON stands for JavaScript Object Notation. It can be found in the following files: address.php, companies.php, login.php, menu.php, placeOrder.php, and register.php.
 
 URL Y: https://www.w3schools.com/js/js_json_intro.asp
 	https://stackoverflow.com/questions/383692/what-is-json-and-why-would-i-use-it
 
-WebService Z: JSON-WSP
-WebService Z:JSON-WSP is a webservice protocol that uses JSON to send requests and get responses. Communication between clients and JSON-WSP is carried out using HTTP POST requests with JSON objects as data.
-Webservice Z: found in all files of the ws folder
-		address.php
-             Companies.php
-	Cuisine.php
-	Login.php
-	Menu.php
-	placeOrder.php
-	Register.php
+WebService Z: JSON-WSP. JSON-WSP is a webservice protocol that uses JSON to send requests and get responses. Communication between clients and JSON-WSP is carried out using HTTP POST requests with JSON objects as data. It is  found in all files of the ws folder:
+address.php, companies.php, cuisine.php, login.php, menu.php, placeOrder.php, and register.php.
+	
 	
 Webservice Z:
 https://ipfs.io/ipfs/QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco/wiki/JSON-WSP.html
