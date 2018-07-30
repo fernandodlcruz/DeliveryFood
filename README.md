@@ -28,4 +28,7 @@ https://ipfs.io/ipfs/QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco/wiki/JSON-WS
 
 
 REFERENCES:
-https://stackoverflow.com/questions/14767530/php-using-pdo-with-in-clause-array		https://api.jquery.com/jquery.post/		https://stackoverflow.com/questions/8599595/send-json-data-from-javascript-to-php		https://materializecss.com/
+1. https://stackoverflow.com/questions/14767530/php-using-pdo-with-in-clause-array
+2. https://api.jquery.com/jquery.post/
+3. https://stackoverflow.com/questions/8599595/send-json-data-from-javascript-to-php
+4. https://materializecss.com/
