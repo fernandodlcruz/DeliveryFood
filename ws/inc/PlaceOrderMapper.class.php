@@ -13,6 +13,42 @@
 
 class PlaceOrderMapper{
 
+    // Start create order
+
+    function createOrder($order){
+        // $order needs the following data:
+        //  $order['companyID'], $order['userID'], $order['menuID']
+        //  $order['qty'], $order['totalPrice'].
+
+        $pdoAgent = new DatabaseAgent;
+
+        $pdoAgent->query("INSERT INTO PlaceOrder (IdCompanyOrder, IdUserOrder, IdMenuOrder, idAddressOrder, OrderDate, Quantity, TotalPrice) 
+        VALUES (:companyId, :userId, :menuId, :addressId, :orderDate, :quantity, :totalPrice);");
+
+        $orderID = 1;
+        // if(isset($order['orderID'])){
+        //     $orderID = $order['orderID'];
+        // }
+        // else{
+             $orderID = $this->getLastID();
+        // }
+
+        $pdoAgent->bind(':orderID', $orderID);
+        $pdoAgent->bind('companyId',$postdata['companyId']);
+        $pdoAgent->bind('userId',$postdata['userId']);
+        $pdoAgent->bind('menuId',$postdata['menuId']);
+        $pdoAgent->bind('addressId',$postdata['addressId']);
+        $pdoAgent->bind('orderDate',date("Y-m-d H:i:s"));
+        $pdoAgent->bind('quantity',$postdata['quantity']);
+        $pdoAgent->bind('totalPrice',$postdata['totalPrice']);
+
+        $pdoAgent->execute();
+
+        return $pdoAgent->lastInsertId();
+    }
+
+    // End create order
+
     // This function returns the a full order
     function getOrderByID($orderID){
         $order = null;
@@ -64,26 +100,12 @@ class PlaceOrderMapper{
         return $order;
     }
 
-    // Create
-    function createOrder($postdata) {
-
+    function getLastID(){
+        $id = 0;
         $pdoAgent = new DatabaseAgent;
-
-        $pdoAgent->query("INSERT INTO PlaceOrder (IdCompanyOrder, IdUserOrder, IdMenuOrder, idAddressOrder, OrderDate, Quantity, TotalPrice) 
-        VALUES (:companyId, :userId, :menuId, :addressId, :orderDate, :quantity, :totalPrice);");
-
-        // postdata is declared in the login file for testing
-        $pdoAgent->bind('companyId',$postdata['companyId']);
-        $pdoAgent->bind('userId',$postdata['userId']);
-        $pdoAgent->bind('menuId',$postdata['menuId']);
-        $pdoAgent->bind('addressId',$postdata['addressId']);
-        $pdoAgent->bind('orderDate',date("Y-m-d H:i:s"));
-        $pdoAgent->bind('quantity',$postdata['quantity']);
-        $pdoAgent->bind('totalPrice',$postdata['totalPrice']);
-        
-        $pdoAgent->execute();
-
-        return $pdoAgent->lastInsertId();
+        $pdoAgent->query("SELECT MAX(idOrder) FROM placeorder;");
+        $id = $pdoAgent->single();
+        return $id['MAX(idOrder)']+1;
     }
 }
 

@@ -35,4 +35,15 @@ if(isset($_GET['callback']) && isset($_GET['companyId'])) {
         header('Access-Control-Allow-Origin: *');
         echo $_GET['callback']."($jsonData)";
 }
+else if(isset($_GET['callback']) ) {
+        $mm = new MenuMapper;
+
+        $menu = $mm->getMenuByBusiness(4);
+
+        $jsonData = json_encode($menu);
+        
+        header('Content-type: application/json');
+        header('Access-Control-Allow-Origin: *');
+        echo $_GET['callback']."($jsonData)";
+}
 ?>
