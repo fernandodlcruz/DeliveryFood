@@ -64,7 +64,7 @@ class UserMapper    {
         return $users;
     }
 
-    function getAllUsersByType($type) {
+    function getAllUsersByType($type, $cuisineId = null) {
         // Type is "C" for customer and
         // "B" for business
         $users = null;
@@ -73,10 +73,18 @@ class UserMapper    {
         $pdoAgent = new DatabaseAgent();
 
         //Setup the query()
-        $pdoAgent->query("SELECT * FROM user WHERE UserType = :type;");
+        if (is_null($cuisineId)) {
+            $pdoAgent->query("SELECT * FROM user WHERE UserType = :type;");
+        } else {
+            $pdoAgent->query("SELECT * FROM user WHERE UserType = :type AND idCuisine = :idCuisine;");
+        }
 
         //Setup the bind parameters
         $pdoAgent->bind(':type',$type);
+
+        if (!is_null($cuisineId)) {
+            $pdoAgent->bind(':idCuisine',$cuisineId);
+        }
 
         //Pull the resultset
         $users = $pdoAgent->resultset();

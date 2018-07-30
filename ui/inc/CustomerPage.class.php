@@ -14,9 +14,15 @@ class CustomerPage extends Page {
     static function showMenuSelection() {?>
         <div class="container">
             <div class="row">
-                <div class="input-field col s12">
+                <div class="input-field col s6">
+                    <select id="cuisine" name="cuisine">
+                        <option value="" disabled selected>Choose your option</option>
+                    </select>
+                <label>Select your preferred cuisine</label>
+                </div>
+                <div class="input-field col s6">
                     <select id="business" name="business">
-                        <option value="" disabled selected>Choose your option</option>                                    
+                        <option value="" disabled selected>Choose your option</option>
                     </select>
                 <label>Select your restaurant</label>
                 </div>

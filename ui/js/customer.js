@@ -3,7 +3,7 @@ $(document).ready(function() {
     var page = path.split("/").pop();
 
     if(page=="customer.php") {
-        loadBusiness();
+        loadCuisine();
         $('.fixed-action-btn').floatingActionButton({hoverEnabled: false});
         $('.tooltipped').tooltip();    
     } else if(page=="customerConfirm.php") {
@@ -13,10 +13,33 @@ $(document).ready(function() {
     }
 });
 
-function loadBusiness() {
+// Load types of cuisine to populate the select field
+function loadCuisine() {
+    $.ajax({
+        url: HOST_NAME + "cuisine.php",
+        dataType: "jsonp",
+        success: function(data) {
+            $.each(data, function (index, obj) {
+                $('#cuisine').append($('<option>', { 
+                    value: obj.idCuisine,
+                    text : obj.Description
+                }));
+            });
+            
+            $('select').formSelect();
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            console.log('status: ' + xhr.status);
+            console.log('error: ' + thrownError);
+        }
+    });
+}
+
+function loadBusiness(cuisineId) {
     $.ajax({
         url: HOST_NAME + "companies.php",
         dataType: "jsonp",
+        data: {cuisineId: cuisineId},
         success: function(data) {
             $.each(data, function (index, obj) {
                 $('#business').append($('<option>', { 
@@ -33,9 +56,19 @@ function loadBusiness() {
     });
 }
 
+// Change restaurants when user select different cuisine
+$('#cuisine').change(function() {
+    $('#menuView').hide();
+    $('#business').html('<option value="" disabled selected>Choose your option</option>');
+    $('.btn-floating').addClass('disabled');
+
+    if ($(this).val()) {
+        loadBusiness($(this).val());
+    }
+});
+
 // Change the menu when user select different restaurant
 $('#business').change(function() {
-
     $.ajax({
         url: HOST_NAME + "menu.php",
         dataType: "jsonp",
