@@ -21,4 +21,16 @@ if(isset($_GET['callback']) && isset($_GET['companyId']) && isset($_GET['userId'
         
         echo $_GET['callback']."($jsonData)";
 }
+if(isset($_GET['callback'])) {
+        $pom = new PlaceOrderMapper;
+        $orders = $pom->getOrdersFromBusiness(4);
+    
+        header('Content-type: application/json');
+        header('Access-Control-Allow-Origin: *');
+    
+        $jsonData = json_encode($orders);
+        
+        echo $_GET['callback']."($jsonData)";
+    }
+
 ?>
