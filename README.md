@@ -1,6 +1,7 @@
 # DeliveryFood
 Php class project
 
+# HAnF Consultants
 
 The two new technologies that we implemented in our term project were Ajax, JSON, and web services. The JSON technology is implemented in the inc files inside the ws folder. These files read if there is a callback to the web service, and if there is grab the specified database/callback and encode the JSON data. The Ajax technology is implemented in the javascript folder files. These provide a call to a certain URL and if the connection is successful it stores data into a variable and grabs that data.
 (Web Service goes here)
