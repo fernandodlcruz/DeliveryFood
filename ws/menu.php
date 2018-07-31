@@ -19,6 +19,23 @@ if(isset($_GET['callback']) && isset($_GET['companyId']) && isset($_GET['name'])
         header('Content-type: application/json');
         header('Access-Control-Allow-Origin: *');
         echo $_GET['callback']."($jsonData)";
+} else if(isset($_GET['callback']) && isset($_GET['companyId']) && isset($_GET['name']) && isset($_GET['updateId'])) { // Update an menu item
+        $mm = new MenuMapper;
+        $item = ['name' => $_GET['name'],
+        'description' => $_GET['description'],
+        'unit' => $_GET['unit'],
+        'price' => $_GET['price'],
+        'companyId' => $_GET['companyId'],
+        'id' => $_GET['updateId']
+        ];
+
+        $menu = $mm->updateItem($item);
+
+        $jsonData = json_encode($menu);
+        
+        header('Content-type: application/json');
+        header('Access-Control-Allow-Origin: *');
+        echo $_GET['callback']."($jsonData)";
 }else if(isset($_GET['callback']) && isset($_GET['companyId'])) {
         $mm = new MenuMapper;
 
@@ -29,10 +46,20 @@ if(isset($_GET['callback']) && isset($_GET['companyId']) && isset($_GET['name'])
         header('Content-type: application/json');
         header('Access-Control-Allow-Origin: *');
         echo $_GET['callback']."($jsonData)";
-} else if(isset($_GET['callback']) && isset($_GET['ids'])) {
+} else if(isset($_GET['callback']) && isset($_GET['ids'])) { // Get one or more items by an ARRAY of ids
         $mm = new MenuMapper;
 
         $menu = $mm->getMenuByIds($_GET['ids']);
+
+        $jsonData = json_encode($menu);
+        
+        header('Content-type: application/json');
+        header('Access-Control-Allow-Origin: *');
+        echo $_GET['callback']."($jsonData)";
+} else if(isset($_GET['callback']) && isset($_GET['idMenu'])) { // Get an specific item by ONE id
+        $mm = new MenuMapper;
+
+        $menu = $mm->getMenuById($_GET['idMenu']);
 
         $jsonData = json_encode($menu);
         
@@ -44,17 +71,6 @@ if(isset($_GET['callback']) && isset($_GET['companyId']) && isset($_GET['name'])
 
         $menu = $mm->deleteItem($_GET['deleteId']);
         $menu = ['deletedId' => $menu];
-
-        $jsonData = json_encode($menu);
-        
-        header('Content-type: application/json');
-        header('Access-Control-Allow-Origin: *');
-        echo $_GET['callback']."($jsonData)";
-}
-else if(isset($_GET['callback']) ) {
-        $mm = new MenuMapper;
-
-        $menu = $mm->getMenuByBusiness(4);
 
         $jsonData = json_encode($menu);
         

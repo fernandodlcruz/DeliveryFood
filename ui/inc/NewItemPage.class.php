@@ -11,16 +11,15 @@ class NewItemPage extends Page {
         <script src="js/newitem.js"></script>
     <?php }
 
-
     static function showNewItemForm() {?>
         <div class="container">
             <div class="row">
-                <h4 class="header">Add a new item to your menu</h4>
+                <h4 class="header"><?php echo (isset($_POST['menuId']) ? 'Update an ' : 'Add a new'); ?> item to your menu</h4>
             </div>
-
             <div class="row">
                 <div class="col s6">
-                    <form class="col s12" method="POST" action="">                        
+                    <form class="col s12" method="POST" action="">
+                        <input id="hdnMenuId" name="hdnMenuId" type="hidden" value="<?php echo (isset($_POST['menuId']) ?: ''); ?>">
                         <div class="row">
                             <div class="input-field col s12">
                                 <input id="name" name="name" type="text" class="validate">
@@ -42,14 +41,18 @@ class NewItemPage extends Page {
                                 <input id="price" name="price" type="text" class="validate">
                                 <label for="price">Price</label>
                             </div>
-                        </div>                     
+                        </div>
                     </form>
                 </div>
             </div>
             <div class="row left">
-                <div class="input-field col s12">
+                <div class="input-field col s6">
                 <button class="btn waves-effect waves-light" type="button" name="btnItem" id="btnItem">Add Item
                     <i class="material-icons right">add</i>
+                </button>
+                </div>
+                <div class="input-field col s6">
+                <button class="btn waves-effect waves-light red" type="button" name="btnCancel" id="btnCancel">Cancel
                 </button>
                 </div>
             </div>
@@ -68,5 +71,4 @@ class NewItemPage extends Page {
             </div>
         </div>
     <?php }
-
 }

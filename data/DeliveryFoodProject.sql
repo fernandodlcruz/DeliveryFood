@@ -75,6 +75,7 @@ CREATE TABLE IF NOT EXISTS `Menu` (
   `Description` VARCHAR(255) NULL,
   `Unit` VARCHAR(45) NULL,
   `Price` DECIMAL(5,2) NULL,
+  `Active` CHAR(1) NULL,
   `IdCompany` INT NULL,
   PRIMARY KEY (`idMenu`),
   UNIQUE INDEX `idMenu_UNIQUE` (`idMenu` ASC),

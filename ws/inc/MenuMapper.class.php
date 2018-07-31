@@ -47,11 +47,25 @@ class MenuMapper{
 
         $pdoAgent = new DatabaseAgent;
 
-        $pdoAgent->query("SELECT * FROM menu WHERE IdCompany = :id;");
+        $pdoAgent->query("SELECT * FROM menu WHERE IdCompany = :id AND Active='A';");
 
         $pdoAgent->bind(':id',$IDbusiness);
 
         $menu = $pdoAgent->resultset();
+
+        return $menu;
+     }
+
+     function getMenuById($id){
+        $menu = null;
+
+        $pdoAgent = new DatabaseAgent;
+
+        $pdoAgent->query("SELECT * FROM menu WHERE idMenu = :id AND Active='A';");
+
+        $pdoAgent->bind('id',$id);
+
+        $menu = $pdoAgent->single();
 
         return $menu;
      }
@@ -62,7 +76,7 @@ class MenuMapper{
 
         $pdoAgent = new DatabaseAgent;
 
-        $pdoAgent->query("SELECT * FROM menu WHERE idMenu IN (".$in.");");
+        $pdoAgent->query("SELECT * FROM menu WHERE idMenu IN (".$in.") AND Active='A';");
 
         $menu = $pdoAgent->resultset($arrIds);
 
@@ -86,7 +100,7 @@ class MenuMapper{
         $pdoAgent = new DatabaseAgent;
 
         $pdoAgent->query("UPDATE menu SET Item=:name, Description=:description, Unit=:unit,
-         Price=:price WHERE idMenu=:id AND idCompany=:businessID;");
+         Price=:price, Active='A' WHERE idMenu=:id AND idCompany=:businessID;");
 
         $pdoAgent->bind('id',$item['id']);
         $pdoAgent->bind('businessID',$item['businessID']);
@@ -108,7 +122,7 @@ class MenuMapper{
      function deleteItem($idItem){
         $pdoAgent = new DatabaseAgent;
 
-        $pdoAgent->query("DELETE FROM menu WHERE idMenu=:id;");
+        $pdoAgent->query("UPDATE menu SET Active='I' WHERE idMenu=:id;");
 
         $pdoAgent->bind('id',$idItem);
 
