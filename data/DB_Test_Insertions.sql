@@ -1,3 +1,5 @@
+USE `deliveryfood`;
+
 INSERT INTO `Cuisine` VALUES
   (1,'Brazilian'),
   (2,'Chinese'),

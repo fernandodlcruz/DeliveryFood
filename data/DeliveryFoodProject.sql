@@ -4,6 +4,15 @@
 -- MySQL Workbench Forward Engineering
 
 -- -----------------------------------------------------
+-- Database deliveryfood
+-- -----------------------------------------------------
+DROP DATABASE IF EXISTS `deliveryfood` ;
+
+CREATE DATABASE `deliveryfood` ;
+
+USE `deliveryfood`;
+
+-- -----------------------------------------------------
 -- Table `Cuisine`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `Cuisine` ;
