@@ -32,7 +32,7 @@ class MenuMapper{
         $pdoAgent->bind('description',$item['description']);
         $pdoAgent->bind('unit',$item['unit']);
         $pdoAgent->bind('price',$item['price']);
-        $pdoAgent->bind('businessID',$item['businessID']);
+        $pdoAgent->bind('businessID',$item['companyId']);
 
         $pdoAgent->execute();
 
