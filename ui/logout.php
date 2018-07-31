@@ -7,6 +7,6 @@ if (isset($_SESSION['user']) && $_SESSION['user']['loggedIn']) {
     unset($_SESSION['user']);
     
     //Use the 'header()' function to redirect them back to the controller.
-    header('Location: ./index.php');
+    header('Location: ./HAnFConsultants.php');
 }
 ?>

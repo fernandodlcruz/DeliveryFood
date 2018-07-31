@@ -57,7 +57,7 @@ class Page {
                         echo '<li><a href="logout.php">Logout</a></li>';
                 } else {
                         //If they arent show a login button (link to the controller file)
-                        echo '<li><a href="index.php">Login</a></li>';
+                        echo '<li><a href="HAnFConsultants.php">Login</a></li>';
                 }
                 ?>
             </ul>            
