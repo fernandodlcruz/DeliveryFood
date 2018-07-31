@@ -33,3 +33,4 @@ REFERENCES:
 2. https://api.jquery.com/jquery.post/
 3. https://stackoverflow.com/questions/8599595/send-json-data-from-javascript-to-php
 4. https://materializecss.com/
+5. https://stackoverflow.com/questions/19036684/jquery-redirect-with-post-data
