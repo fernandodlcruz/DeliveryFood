@@ -15,7 +15,7 @@ class PlaceOrderMapper{
 
     // Start create order
 
-    function createOrder($order){
+    function createOrder($postdata){
         // $order needs the following data:
         //  $order['companyID'], $order['userID'], $order['menuID']
         //  $order['qty'], $order['totalPrice'].
@@ -25,15 +25,15 @@ class PlaceOrderMapper{
         $pdoAgent->query("INSERT INTO PlaceOrder (IdCompanyOrder, IdUserOrder, IdMenuOrder, idAddressOrder, OrderDate, Quantity, TotalPrice) 
         VALUES (:companyId, :userId, :menuId, :addressId, :orderDate, :quantity, :totalPrice);");
 
-        $orderID = 1;
-        // if(isset($order['orderID'])){
-        //     $orderID = $order['orderID'];
-        // }
-        // else{
-             $orderID = $this->getLastID();
-        // }
+        // $orderID = 1;
+        // // if(isset($order['orderID'])){
+        // //     $orderID = $order['orderID'];
+        // // }
+        // // else{
+        //      $orderID = $this->getLastID();
+        // // }
 
-        $pdoAgent->bind(':orderID', $orderID);
+        //$pdoAgent->bind('orderID', $orderID);
         $pdoAgent->bind('companyId',$postdata['companyId']);
         $pdoAgent->bind('userId',$postdata['userId']);
         $pdoAgent->bind('menuId',$postdata['menuId']);

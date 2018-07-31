@@ -23,7 +23,7 @@ if(isset($_GET['callback']) && isset($_GET['email']) && isset($_GET['pwd']) && i
                 ];
         }
         
-        $postdata['id'] = $um->createUser($postdata);
+        $postdata['idUser'] = $um->createUser($postdata);
         $postdata['loggedIn'] = true;
         $postdata['Pwd'] = "";
 
