@@ -8,6 +8,7 @@
 // | Description | varchar(255) | YES  |     | NULL    |                |
 // | Unit        | varchar(45)  | YES  |     | NULL    |                |
 // | Price       | decimal(5,2) | YES  |     | NULL    |                |
+// | Active      | char(1)      | YES  |     | NULL    |                |
 // | IdCompany   | int(11)      | YES  | MUL | NULL    |                |
 // +-------------+--------------+------+-----+---------+----------------+
 
@@ -25,8 +26,8 @@ class MenuMapper{
 
         $pdoAgent = new DatabaseAgent;
 
-        $pdoAgent->query("INSERT INTO menu (Item, Description, Unit, Price, IdCompany) 
-        VALUES (:name, :description, :unit, :price, :businessID);");
+        $pdoAgent->query("INSERT INTO menu (Item, Description, Unit, Price, Active, IdCompany) 
+        VALUES (:name, :description, :unit, :price, 'A',:businessID);");
 
         $pdoAgent->bind('name',$item['name']);
         $pdoAgent->bind('description',$item['description']);

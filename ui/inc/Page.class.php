@@ -42,7 +42,7 @@ class Page {
         <nav>
             <div class="nav-wrapper">
             <?php
-            if (isset($_SESSION['user']) && $_SESSION['user']['loggedIn']) {
+            if (isset($_SESSION['user']) && isset($_SESSION['user']['loggedIn'])){
                 echo '<a href="#" class="brand-logo">&emsp;'.self::$title.' - '.$_SESSION['user']['Name'].'</a>';
                 echo '<input id="hdnUid" name="hdnUid" type="hidden" value="'.$_SESSION['user']['idUser'].'">';
             } else {
@@ -52,7 +52,7 @@ class Page {
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <?php
                 //Check if the user is logged in
-                if (isset($_SESSION['user']) && $_SESSION['user']['loggedIn']) {
+                if (isset($_SESSION['user']) && isset($_SESSION['user']['loggedIn'])) {
                         //If they are show a logout button that sends them to logout.php
                         echo '<li><a href="logout.php">Logout</a></li>';
                 } else {

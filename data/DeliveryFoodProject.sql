@@ -103,7 +103,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `PlaceOrder` ;
 
 CREATE TABLE IF NOT EXISTS `PlaceOrder` (
-  `idOrder` INT NOT NULL,
+  `idOrder` INT NOT NULL AUTO_INCREMENT,
   `IdCompanyOrder` INT NULL,
   `IdUserOrder` INT NULL,
   `IdMenuOrder` INT NOT NULL,
